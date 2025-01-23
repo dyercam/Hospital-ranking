@@ -1,0 +1,19 @@
+## This is the ReadMe for the hospital ranking code.
+
+## The code written in this project creates functions to look through a database filled with information about different hospitals in the United states. 
+## This ReadMe has barebones information on how to properly use those functions.
+
+
+rankhospital:
+
+rankhospital(state, outcome, num = "best")
+
+## Rankhospital takes two required inputs, and one optional input
+
+  ## state: the abbreviation of a state, such as "MD", "AL", "CA", etc
+  ## outcome: takes one of three inputs, "heart failure", "heart attack", or "pneumonia"
+  ##num: automatically set to "best", but you can also input "worst"
+
+ex:
+rankhospital("MD", "heart attack")
+rankhospital("TX", "heart failure", "worst")
