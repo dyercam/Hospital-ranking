@@ -14,7 +14,9 @@ rankhospital(state, outcome, num = "best")
 
   ## state: the abbreviation of a state, such as "MD", "AL", "CA", etc
   ## outcome: takes one of three inputs, "heart failure", "heart attack", or "pneumonia"
-  ##num: automatically set to "best", but you can also input "worst"
+  ##num: automatically set to "best", but will also take "worst", or a numeric input as well
+
+## returns the hospital that is the best, worst, or the specific numeric input based on the given outcome
 
 ex:
 rankhospital("MD", "heart attack")
@@ -30,5 +32,24 @@ best(state, outcome)
   ## state: the abbreviatione of a state, such as "MD", "AL, "CA", etc
   ## outcome: takes one of three inputs, "heart failure", "heart attack", or "pneumonia"
 
+## returns the best hospital in the given state for the given outcome
+
 ex:
 best("MD", "heart attack")
+
+
+
+rankall:
+
+rankall(outcome, num="best")
+
+## rankall takes one required input, and one optional input
+
+  ## outcome: takes one of three inputs, "heart failure", "heart attack", or "pneumonia"
+  ## num: automatically set to "best" if no input is given, but will also take "worst", or a numeric input as well
+
+## returns a list of hospitals that are the best or worst, given the proper input (or ranked from the numeric input), based on the given outcome.
+
+ex:
+rankall("heart attack")
+rankhospital("heart failure", 13)
