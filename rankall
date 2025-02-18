@@ -1,0 +1,111 @@
+rankall <- function(outcome, num = "best") {
+  ## Read outcome data
+  care_data <- read.csv("~/Documents/Hopkins Data Science Course Assignments/r programming class/assignment 3/outcome-of-care-measures.csv", colClasses = "character")
+  output_data <- data.frame(hospital = character(), state = character())
+  ## Check that outcome is valid
+  
+  if( outcome != "heart attack" && outcome != "heart failure" && outcome != "pneumonia") {
+    stop("invalid outcome")
+  }
+  
+  #create an object with all the state names
+  state_column <- care_data[,7]
+  states <- sort(unique(state_column))
+  
+  
+  ## For each state, find the hospital of the given rank
+  
+  for(state in states){
+    state_data <- data.frame(Hospital.Name = character(), HA = numeric(), HF = numeric(), PN = numeric())
+    for(i in 1:nrow(care_data)){
+      
+      if (care_data[i,7] == state){
+        state_data <- rbind(state_data, 
+                            data.frame(Hospital.Name = care_data[i, "Hospital.Name"],
+                                       HA = as.numeric(care_data[i, "Hospital.30.Day.Death..Mortality..Rates.from.Heart.Attack"]),
+                                       HF = as.numeric(care_data[i, "Hospital.30.Day.Death..Mortality..Rates.from.Heart.Failure"]),
+                                       PN = as.numeric(care_data[i, "Hospital.30.Day.Death..Mortality..Rates.from.Pneumonia"]),
+                                       stringsAsFactors = FALSE))
+        
+      }
+    }
+    
+    ## triple if statement for the output
+    if(outcome == "heart attack"){
+      
+      #set up clean and organized data
+      clean_data <- state_data[!is.na(state_data[,2]),]
+      clean_data <- clean_data[order(clean_data[,2]), ]
+      clean_data <- clean_data[order(clean_data[, 2], clean_data[, 1]), ]
+      
+      
+      
+      ## if statements for best, worst, and otherwise
+      if(num == "best"){
+        newrow <- data.frame(hospital = clean_data[1,1], state = state)
+        output_data <- rbind(output_data, newrow)
+        
+      }
+      else if(num == "worst"){
+        newrow <- data.frame(hospital = clean_data[nrow(clean_data),1], state = state)
+        output_data <- rbind(output_data, newrow)
+      }
+      else{
+        newrow <- data.frame(hospital = clean_data[num,1], state = state)
+        output_data <- rbind(output_data, newrow)
+      }
+    }
+    if(outcome == "heart failure"){
+      #set up clean and organized data
+      clean_data <- state_data[!is.na(state_data[,3]),]
+      clean_data <- clean_data[order(clean_data[,3]), ]
+      clean_data <- clean_data[order(clean_data[, 3], clean_data[, 1]), ]
+      
+      
+      
+      ## if statements for best, worst, and otherwise
+      if(num == "best"){
+        newrow <- data.frame(hospital = clean_data[1,1], state = state)
+        output_data <- rbind(output_data, newrow)
+        
+      }
+      else if(num == "worst"){
+        newrow <- data.frame(hospital = clean_data[nrow(clean_data),1], state = state)
+        output_data <- rbind(output_data, newrow)
+      }
+      else{
+        newrow <- data.frame(hospital = clean_data[num,1], state = state)
+        output_data <- rbind(output_data, newrow)
+      }
+    }
+    if(outcome == "pneumonia"){
+      #set up clean and organized data
+      clean_data <- state_data[!is.na(state_data[,4]),]
+      clean_data <- clean_data[order(clean_data[,4]), ]
+      clean_data <- clean_data[order(clean_data[, 4], clean_data[, 1]), ]
+      
+      
+      
+      ## if statements for best, worst, and otherwise
+      if(num == "best"){
+        newrow <- data.frame(hospital = clean_data[1,1], state = state)
+        output_data <- rbind(output_data, newrow)
+        
+      }
+      else if(num == "worst"){
+        newrow <- data.frame(hospital = clean_data[nrow(clean_data),1], state = state)
+        output_data <- rbind(output_data, newrow)
+      }
+      else{
+        newrow <- data.frame(hospital = clean_data[num,1], state = state)
+        output_data <- rbind(output_data, newrow)
+      }
+    }
+    
+  }
+  
+  ## Return a data frame with the hospital names and the
+  ## (abbreviated) state name
+  
+  return(output_data)
+}
