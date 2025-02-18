@@ -19,3 +19,16 @@ rankhospital(state, outcome, num = "best")
 ex:
 rankhospital("MD", "heart attack")
 rankhospital("TX", "heart failure", "worst")
+
+
+best:
+
+best(state, outcome)
+
+## best takes two required inputs
+
+  ## state: the abbreviatione of a state, such as "MD", "AL, "CA", etc
+  ## outcome: takes one of three inputs, "heart failure", "heart attack", or "pneumonia"
+
+ex:
+best("MD", "heart attack")
