@@ -1,4 +1,6 @@
 ## This is the ReadMe for the hospital ranking code.
+## Note: The dataset was supplied from JHU's Data science course. The Functions were made in line with the requirements for the assignment.
+
 
 ## The code written in this project creates functions to look through a database filled with information about different hospitals in the United states. 
 ## This ReadMe has barebones information on how to properly use those functions.
